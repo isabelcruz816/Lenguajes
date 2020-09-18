@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="q0">
+			<x>321.0</x>
+			<y>199.0</y>
+			<initial/>
+		</state>
+		<state id="1" name="q1">
+			<x>624.0</x>
+			<y>59.0</y>
+		</state>
+		<state id="2" name="q2">
+			<x>764.0</x>
+			<y>28.0</y>
+		</state>
+		<state id="3" name="q3">
+			<x>748.0</x>
+			<y>391.0</y>
+		</state>
+		<state id="4" name="q4">
+			<x>1092.0</x>
+			<y>223.0</y>
+		</state>
+		<state id="5" name="q5">
+			<x>485.0</x>
+			<y>472.0</y>
+			<label>INT</label>
+			<final/>
+		</state>
+		<state id="6" name="q6">
+			<x>1061.0</x>
+			<y>393.0</y>
+			<label>FLT</label>
+			<final/>
+		</state>
+		<state id="7" name="q7">
+			<x>256.0</x>
+			<y>376.0</y>
+			<label>OPB</label>
+			<final/>
+		</state>
+		<state id="8" name="q8">
+			<x>266.0</x>
+			<y>104.0</y>
+			<label>LRP</label>
+			<final/>
+		</state>
+		<state id="9" name="q9">
+			<x>340.0</x>
+			<y>55.0</y>
+			<label>RRP</label>
+			<final/>
+		</state>
+		<state id="10" name="q10">
+			<x>129.0</x>
+			<y>38.0</y>
+			<label>OPA</label>
+			<final/>
+		</state>
+		<state id="11" name="q11">
+			<x>508.0</x>
+			<y>11.0</y>
+			<label>OPR</label>
+			<final/>
+		</state>
+		<state id="12" name="q12">
+			<x>470.0</x>
+			<y>262.0</y>
+			<label>IDE</label>
+			<final/>
+		</state>
+		<state id="13" name="q13">
+			<x>1067.0</x>
+			<y>21.0</y>
+			<label>ERR</label>
+		</state>
+		<state id="14" name="q14">
+			<x>382.0</x>
+			<y>360.0</y>
+			<label>END</label>
+			<final/>
+		</state>
+		<state id="15" name="q15">
+			<x>173.0</x>
+			<y>315.0</y>
+			<label>DIF</label>
+		</state>
+		<state id="16" name="q16">
+			<x>74.0</x>
+			<y>189.0</y>
+			<label>COND</label>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read/>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>3</to>
+			<read>dig</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>15</to>
+			<read>!</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>esp</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>dig</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>3</to>
+			<read>dig</read>
+		</transition>
+		<transition>
+			<from>15</from>
+			<to>14</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>8</to>
+			<read>(</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>4</to>
+			<read>raro, .</read>
+		</transition>
+		<transition>
+			<from>4</from>
+			<to>13</to>
+			<read>dig, op, (, ), esp, $, asig, !, rel, cond</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>4</to>
+			<read>raro, .</read>
+		</transition>
+		<transition>
+			<from>10</from>
+			<to>11</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>11</from>
+			<to>11</to>
+			<read>=, $</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>16</to>
+			<read>?, :</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>4</to>
+			<read>raro, .</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>2</to>
+			<read>.</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>5</to>
+			<read>op</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>6</to>
+			<read>op, (, ), raro, esp, $, letra, asig, !, rel, cond</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>5</to>
+			<read>(, ), raro, esp, $, letra, asig, !, rel, cond</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>9</to>
+			<read>)</read>
+		</transition>
+		<transition>
+			<from>16</from>
+			<to>16</to>
+			<read>$</read>
+		</transition>
+		<transition>
+			<from>12</from>
+			<to>12</to>
+			<read>letra</read>
+		</transition>
+		<transition>
+			<from>3</from>
+			<to>4</to>
+			<read>.</read>
+		</transition>
+		<transition>
+			<from>2</from>
+			<to>13</to>
+			<read>op, (,), esp, $, letra, asig, !, rel, cond</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>12</to>
+			<read>letra</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>10</to>
+			<read>=</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>dig</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>7</to>
+			<read>op</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>11</to>
+			<read>&lt;,&gt;</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>14</to>
+			<read>$</read>
+		</transition>
+	</automaton>
+</structure>
