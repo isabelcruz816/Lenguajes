@@ -7,7 +7,7 @@
       (+ (/ 1 n) (armonica (- n 1)))
       ))
 
-; Problema 2 - Bajasube
+; Problema 2 - Bajasume
 (define (bajasube n)
   (if (= n 0)
       ""
