@@ -56,6 +56,25 @@
     ((null? g) '())
     (else (adyacencias-aux 1 g))))
 
+; Eliminar nodo de un grafo y sus adyacencias
+(define (elimina-nodo grafo nodo)
+  (apply append
+         (map
+          (lambda (seccion)
+            (if (eq? (car seccion) nodo)
+                '()
+                (list 
+                 (append (list(car seccion))
+                         (apply append
+                                (map
+                                 (lambda (adyacente)
+                                   (if (eq? (car adyacente) nodo)
+                                       '()
+                                       (list adyacente) )
+                                   ) (cdr seccion)))) )
+                ))
+          grafo)))
+
 ; Pilas
 (define (pop pila)
   (cdr pila))
@@ -116,6 +135,17 @@
 (define (simetrico n)
    (nuevaList n 0))
 
+; Elimina n elemento de una lista imbricada
+(define (elimina n lista)
+  (cond
+    ((null? lista)
+     '())
+    ((equal? n (car lista))
+     (elimina n (cdr lista)))
+    ((list? (car lista))
+     (cons (elimina n (car lista)) (elimina n (cdr lista))))
+    (else(cons (car lista) (elimina n (cdr lista))))))
+
 ; Recursividad Terminal
 ; El modulo no contiene operaciones adicionales a la llamada recursiva
 ; Fibonacci terminal
@@ -156,3 +186,25 @@
     (else
      (map (lambda (ren)
             (filter odd? ren)) mat))))
+
+; Generar todos los pares posibles de una lista plana
+(define (empareja lst)
+  (apply append
+         (map (lambda (x)
+                (map (lambda (y) (append (list x) (list y))) lst)) lst)))
+
+(define (y x) x)
+(define (x) (y 'y))
+(define a 8)
+
+(define a+b-c 'a+b-c)
+
+(define (misterio n m)
+   (cond ((> m n) (misterio m n))
+         ((= (remainder n m) 0) m)
+         (else (misterio m (remainder n m)))))
+
+(define (enigma datos)
+   (cond ((null? (cdr datos)) datos)
+         (else (enigma (cons (car datos)(cdr (cdr datos)))))))
+
