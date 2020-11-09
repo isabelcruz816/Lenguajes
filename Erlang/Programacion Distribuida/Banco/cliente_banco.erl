@@ -2,7 +2,7 @@
 -export([consulta/1, deposita/2, retira/2]).
 
 % Nombre largo del servidor (nombre@maquina)
-matriz() -> 'servidor@BAN280'.
+matriz() -> 'servidor@Isabels-MacBook-Pro'.
 
 % Funciones de interface
 consulta(Quien) ->
