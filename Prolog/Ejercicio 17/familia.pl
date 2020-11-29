@@ -30,8 +30,43 @@ padre(gerardo, hanna).
 padre(gerardo, hanna).
 
 % Familia Hector
+padre(ricardo, hector).
+padre(ricardo, ricky).
+padre(nancy, hector).
+padre(nancy, ricky).
+padre(ricardosr, ricardo).
+padre(laurasr, ricardo).
+padre(hectorsr, nancy)
+padre(maria, nancy)
+padre(ricardosr, carlos)
+padre(laurasr, carlos)
+padre(carlos, daniel)
+padre(carlos, lucia)
+padre(carlos, andrea)
+padre(hilda, daniel)
+padre(hilda, lucia)
+padre(hilda, andrea)
+padre(ricardosr, lety)
+padre(laurasr, lety)
+padre(lety, alex)
+padre(lety, daniela)
+padre(lety, juan)
+padre(juancarlos, alex)
+padre(juancarlos, daniela)
+padre(juancarlos, juan)
+padre(hectorsr, nora)
+padre(maria, nora)
+padre(nora, sergito)
+padre(nora, pamela)
+padre(sergio, sergito)
+padre(sergio, pamela)
 
 % Familia Ruben
+padre(ruben, jorge).
+padre(ruben, arely).
+padre(jorge, edgar).
+padre(jorge, said).
+padre(arely, karla).
 
 % Reglas
 % X es hijo de Y si padre de X es Y
@@ -40,7 +75,6 @@ hijo(Hijo, Padre):-
 
 hermano(Hermano1, Hermano2):-
     padre(X, Hermano1), padre(X, Hermano2),
-    hijo(Hermano1, X), hijo(Hermano2, X),
     not(Hermano1 = Hermano2).
 
 abuelo(Abuelo, Nieto):-
@@ -55,6 +89,6 @@ tio(Tio, Sobrino):-
 sobrino(Sobrino, Tio):-
     tio(Tio, Sobrino).
 
-primo(Primo1, Primo2):-
-    padre(X, Primo1), tio(X, Primo2);
-    padre(X, Primo2), tio(X, Primo1).
+primo(Primo1, Primo2) :- 
+    padre(X, Primo1), padre(Y, Primo2),
+    hermano(X, Y).
