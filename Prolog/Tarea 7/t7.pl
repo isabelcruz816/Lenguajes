@@ -54,40 +54,6 @@ carAux(Elemento, [H1|T2], R):-
     append(E, O, R),
     !.
 
-examen(N, N) :- N < 10.
-examen(N, R) :- X is N // 10,
-                                   examen(X, S),
-                                    R is S + N mod 10.
-
-a(X1) :- !, g(X1).
-a(X2) :- f(X2).
-b(a).
-b(X3) :- f(X3).
-g(b).
-g(X4) :- b(X4).
-f(c) :- !.
-f(d).
-
-examen2(0, 0).
- examen2(N, R) :- X is N-1, examen2(X, S), R is N+S.
-
-
-
-misterio(1,[X|_],[Z]) :- Z is X*2.
-misterio(N,[X|Y],Z) :-
-    M is N-1, misterio(M,Y,V),
-    U is X*2, Z = [U|V].
-
-p(L, R) :- q(L, [], R).
-q([H|T], S, R) :- !, q(T, [H|S], R).
-q([], R, R).
-
-m(e(e(X, Y), R), [P|U]) :- !, m(e(X, Y), P), m(R, U).
-m(e(X, Y), [X|R]) :- !, m(Y, R).
-m(n ,[]).
-
-
-
 % Caso base 1: se pasa una longitud que no es valida
 % Caso base 2: la lista vacia
 % Caso general: se pasa una longitud valida
