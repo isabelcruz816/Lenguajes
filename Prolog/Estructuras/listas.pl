@@ -30,3 +30,14 @@ interseccion([X|XS], C2, [X|C3]) :-
 
 % Caso base
 interseccion([], _, []).
+
+
+% Caso base
+agrega_aux(Elemento, Pos, 0, [X|XS], R) :-
+  !, agrega(Elemento, Pos, [X|XS], [Elemento|R]).
+
+agrega(Elemento, Pos, [X|XS], R):-
+  M is Pos-1, !, 
+  agrega_aux(Elemento, Pos, M, [X|XS], R).
+
+agrega(_, _, [], []).

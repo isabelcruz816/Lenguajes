@@ -1,124 +1,117 @@
-% xor
-% xor(true,false).
-xor(true, false).
-xor(false, true).
-% Caso general
-xor(A, B) :-
-   A , not(B), !.
-xor(A, B) :-
-   not(A) , B, !.
+% Problema 1
+xor(C1, C2) :-
+  C1, not(C2), !.
+xor(C1, C2) :-
+  not(C1), C2, !.
 
-% enesimo
-% enesimo(3,[-1,6,2,-3],M). => M = 2.
-% Caso Base: Lista Vacia
-% Caso General, M empieza en 1
-enesimo(N, L, M) :-
-    enesimo_aux(N, L, M, 1).
-% Caso General A: Es el primer elemento
+% Problema 2
+enesimo(N, L, M):-
+  enesimo_aux(N, L, M, 1).
 enesimo_aux(N, [X|_], M, N) :-
-    M is X, !.
-% Caso General B: No es el primer elemento
+  M is X, !.
 enesimo_aux(N, [_|XS], M, C) :-
-    C1 is C + 1,
-    enesimo_aux(N, XS, M, C1).
+  C1 is C + 1,
+  enesimo_aux(N, XS, M, C1).
+  
+% Problema 3
+intersectan([X|_], [X|_]) :- !.
+intersectan([_|XS], [_|YS]) :- 
+  !, intersectan(XS, YS).
 
-% 6 - 9
-cuenta_profundo(Target, List, Result) :-
-    cuenta_profundo(Target, List, 0, Result).
-cuenta_profundo(Target, [Target|Rest], M, Result) :-
-    Z is M + 1,
-    cuenta_profundo(Target, Rest, Z, Result).
-
-cuenta_profundo(Target, [List1|List2], M, Result) :-
-    is_list(List1),
-    cuenta_profundo(Target, List1, 0, Result1),
-    cuenta_profundo(Target, List2, 0, Result2),
-    Result is M + Result1 + Result2,
+% Problema 4
+rango(Inicio, Fin, R) :-
+    rangoAux(Inicio, Fin, [], R),
     !.
 
-cuenta_profundo(Target, [_|Rest], M, Result) :-
-    cuenta_profundo(Target, Rest, M, Result), !.
-
-cuenta_profundo(C, [], M, M) :- !.
-
-
-tabla(Num, R) :-
-    tabla(Num, 1, R).
-
-tabla(_, 11, _) :- !.
-tabla(Num, Factor, [[[Num, Factor], X] | W ]) :-
-    !,
-    X is Num * Factor,
-    F is Factor + 1,
-    write(Num) ,write('*'), write(Factor), write(' = '), write(X), nl,
-    tabla(Num, F, W).
-
-
-
-miembro(X, [X|_]) :- !.
-miembro(X, [T|_]) :- 
-    is_list(T),
-    miembro(X,T),
+rangoAux(Inicio, Fin, Acum, R) :-
+    Inicio =\= Fin,
+    append(Acum, [Inicio], R2),
+    I2 is Inicio+1,
+    rangoAux(I2, Fin, R2, R), 
     !.
 
-miembro(X, [_|R]) :- miembro(X, R).
-
-
-lista_unicos([First|Rest], R) :-
-    flatten([First|Rest], [F1|R1]),
-    lista_unicos(F1, [], R1, R), !.
-
-lista_unicos(X, Left, [Next|Rest], [X|W]) :-
-    not(is_list(X)),
-    is_unique(X, Left, [Next|Rest]),
-    append(Left, [X], NewLeft),
-    lista_unicos(Next, NewLeft, Rest, W).
-
-lista_unicos(X, Left, [], [X|W]) :-
-    not(is_list(X)),
-    is_unique(X, Left, []),
-    append(Left, [X], NewLeft),
-    lista_unicos(Next, NewLeft, [], W).
-
-lista_unicos(X, Left, [Next|Rest], W) :-
-    not(is_list(X)),
-    not(is_unique(X, Left, [Next|Rest])),
-    append(Left, [X], NewLeft),
-    lista_unicos(Next, NewLeft, Rest, W).
-
-lista_unicos(,,[],[]) :- !.
-
-is_unique(X, Left, Right) :-
-    not(miembro(X, Left)),
-    not(miembro(X, Right)).
-
-
-mayores(N, arbol(Root, Izq, Der), [Root|W]) :-
-    N < Root,
-    mayores(N, Izq, I),
-    mayores(N, Der, D),
-    append(I,D, W),
+rangoAux(Inicio, Fin, Acum, R) :-
+    Inicio =:= Fin,
+    append(Acum, [Fin], R),
     !.
 
-mayores(N, arbol(Root, Izq, Der), W) :-
-    N > Root,
-    mayores(N, Izq, I),
-    mayores(N, Der, D),
-    append(I,D, W),
+% Problema 5
+cartesiano([], _, []):- !.
+
+cartesiano([Head|Tail], M2, R) :-
+    carAux(Head, M2, O),
+    cartesiano(Tail, M2, P),
+    append(O, P, R),
     !.
 
-mayores(_, nil, []) :- !.
+carAux(_, [], []):-
+    !.
 
-% 10
-% Como auxiliar, la funcion insert, el cual inserta un nodo
-% en un arbol binario segun su comparacion con el nodo raiz.
-insert(R, nil, arbol(R, nil, nil)) :- !.
-insert(R, arbol(R, SubLeft, SubRight), arbol(R, SubLeft, SubRight)):- !.
-insert(R, arbol(N, SubLeft, SubRight), arbol(N, NewLeft, SubRight)) :-
-  R < N, insert(R, SubLeft, NewLeft), !.
-insert(R, arbol(N, SubLeft, SubRight), arbol(N, SubLeft, NewRight)) :-
-  R > N, insert(R, SubRight, NewRight), !.
+carAux(Elemento, [H1|T2], R):-
+    append([Elemento], [H1], A),
+    append([A], [], E),
+    carAux(Elemento, T2, O),
+    append(E, O, R),
+    !.
 
-siembra(L, A):- siembra_aux(L, nil, A).
-siembra_aux([], A, A) :- !.
-siembra_aux([X|XS], Sub, A) :- insert(X, Sub, Sub2), siembra_aux(XS, Sub2, A).
+examen(N, N) :- N < 10.
+examen(N, R) :- X is N // 10,
+                                   examen(X, S),
+                                    R is S + N mod 10.
+
+a(X1) :- !, g(X1).
+a(X2) :- f(X2).
+b(a).
+b(X3) :- f(X3).
+g(b).
+g(X4) :- b(X4).
+f(c) :- !.
+f(d).
+
+examen2(0, 0).
+ examen2(N, R) :- X is N-1, examen2(X, S), R is N+S.
+
+
+
+misterio(1,[X|_],[Z]) :- Z is X*2.
+misterio(N,[X|Y],Z) :-
+    M is N-1, misterio(M,Y,V),
+    U is X*2, Z = [U|V].
+
+p(L, R) :- q(L, [], R).
+q([H|T], S, R) :- !, q(T, [H|S], R).
+q([], R, R).
+
+m(e(e(X, Y), R), [P|U]) :- !, m(e(X, Y), P), m(R, U).
+m(e(X, Y), [X|R]) :- !, m(Y, R).
+m(n ,[]).
+
+
+
+% Caso base 1: se pasa una longitud que no es valida
+% Caso base 2: la lista vacia
+% Caso general: se pasa una longitud valida
+divide([], _, [], []) :- !.
+divide(Lista,0,[],Lista):- !.
+divide([X|XS],N,[X|L1],L2) :- 
+  N > 0, !, 
+  N1 is N - 1,
+  divide(XS,N1,L1,L2).
+divide(_,N,L1,L2) :- 
+  N < 0,
+  divide(_,N,L1,L2), !.
+
+% Caso base 1: la lista vacia
+agrega(_, _, [], []):- !.
+% Caso base 2: agregar cada 0 posiciones
+agrega(_, 0, _, []):- !.
+% Caso general:
+agrega(Pos, Pos, Lista, R):-
+  agrega_aux(X, Pos, Pos, Lista, R).
+
+agrega_aux(Elemento, 0, Pos, [X|XS], [Elemento|YS]):-
+  agrega_aux(Elemento, Pos, Pos, XS, YS), !.
+
+agrega_aux(Elemento, M, Pos, [X|XS], R):-
+  M is Pos-1, !,
+  agrega_aux(Elemento, M, Pos, XS, R).
